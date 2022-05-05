@@ -1,0 +1,20 @@
+{
+    "files.exclude": {
+        "**/node_modules/**": true,
+        "**/lib/**": true,
+        "**/dist/**": true,
+        "**/.nyc_output/**": true,
+        "**/package-lock.json/**": true
+    },
+    "cSpell.words": [
+        "codezero",
+        "kubeconfig",
+        "kubernetes",
+        "k8s"
+    ],
+    "typescript.preferences.quoteStyle": "single",
+    "typescript.format.semicolons": "remove",
+    "barrelr.useDoubleQuotes": false,
+    "barrelr.useSemiColons": false,
+    "trailing-spaces.trimOnSave": true
+}
