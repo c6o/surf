@@ -1,0 +1,20 @@
+{
+    "staticFiles": "public",
+    "bundle": {
+        "entryPoints": [
+            "./src/index.ts",
+            "./src/sw.ts"
+        ],
+        "minify": true,
+        "platform": "browser",
+        "sourcemap": true,
+        "target": "es2018",
+        "format": "esm",
+        "write": true
+    },
+    "develop": {
+        "open": true,
+        "port": 1234,
+        "historyindex": "/index.html"
+    }
+}

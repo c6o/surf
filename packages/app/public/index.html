@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/png" href="/icons/favicon.ico" />
+
+        <script src="//unpkg.com/jquery@3.6.0/dist/jquery.js"></script>
+        <link rel="stylesheet" href="//unpkg.com/fomantic-ui@2.8.8/dist/semantic.min.css">
+        <script src="//unpkg.com/fomantic-ui@2.8.8/dist/semantic.js"></script>
+
+        <script src="//unpkg.com/@feathersjs/client@^4.5.14/dist/feathers.js"></script>
+        <script src="//cdn.socket.io/socket.io-2.3.0.js"></script>
+
+        <script type="module" src="//unpkg.com/@alenaksu/json-viewer@1.0.0/dist/json-viewer.js"></script>
+        <script src="//unpkg.com/hotkeys-js@3.9.3/dist/hotkeys.min.js"></script>
+        <script src="//unpkg.com/dayjs@1.11.1/dayjs.min.js"></script>
+        <script src="//unpkg.com/dayjs@1.11.1/plugin/relativeTime"></script>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/hmac-md5.min.js" integrity="sha512-gy8JaBxTrtIxNLe1FfMAXey61VjQk3Af4EyY/EpVfmWPH16iCgdRZMHEFgKIyxMrarlc6+rDf6WneGL4SWqnpg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <!--link rel="stylesheet" href="//unpkg.com/xterm/css/xterm.css" />
+        <script src="//unpkg.com/xterm/lib/xterm.js"></script>
+        <script src="//unpkg.com/xterm-addon-fit/lib/xterm-addon-fit.js"></script-->
+
+        <link rel="stylesheet" href="//unpkg.com/xterm@4.18.0/css/xterm.css" />
+        <script src="//unpkg.com/xterm@4.18.0/lib/xterm.js"></script>
+        <script src="//unpkg.com/xterm-addon-fit@0.5.0/lib/xterm-addon-fit.js"></script>
+
+
+        <link rel="manifest" href="/manifest.json" />
+        <style>
+            #container {
+                padding-bottom: 10px;
+                padding-top: 10px;
+                padding-left:10px;
+                padding-right:10px;
+                height: 100%;
+                width: auto !important;
+            }
+            #search-box {
+                width: 100%;
+            }
+            #search-input {
+                border-left: 0 none !important;
+                border-top: 0 none !important;
+                border-right: 0 none !important;
+                border-radius: 0% !important;
+                box-shadow: none;
+            }
+            #toolbar {
+                margin-bottom: -3pt !important;
+            }
+            .c6o-panel { background-color: lightgrey; }
+            .logo {
+                height: 40px;
+                margin-right: 12px;
+                width: 40px;
+            }
+            tr {
+                cursor: pointer;
+            }
+            .active {
+                background-color: cornflowerblue;
+            }
+            pre {
+                white-space: pre-wrap;       /* Since CSS 2.1 */
+                white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+                white-space: -pre-wrap;      /* Opera 4-6 */
+                white-space: -o-pre-wrap;    /* Opera 7 */
+                word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            }
+            section { margin-bottom: 30px; }
+            #result-grid {
+                height: inherit;
+            }
+            #json {
+                height: 100%;
+            }
+
+            @-webkit-keyframes changed {
+                from { background-color: #FAE170; }
+                to { background-color: inherit; }
+            }
+            @-moz-keyframes changed {
+                from { background-color: #FAE170; }
+                to { background-color: inherit; }
+            }
+            @-o-keyframes changed {
+                from { background-color: #FAE170; }
+                to { background-color: inherit; }
+            }
+            @keyframes changed {
+                from { background-color: #FAE170; }
+                to { background-color: inherit; }
+            }
+            .changed {
+                -webkit-animation: changed 5s; /* Safari 4+ */
+                -moz-animation:    changed 5s; /* Fx 5+ */
+                -o-animation:      changed 5s; /* Opera 12+ */
+                animation:         changed 5s; /* IE 10+ */
+            }
+
+            #terminal {
+                height: 100%;
+                width: 100%;
+            }
+
+            .discord-alt {
+                height: 20px;
+                width: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="sidebar" class="ui very wide right sidebar">
+            <json-viewer id="json" data="{}"></json-viewer>
+        </div>
+        <div class="pusher">
+            <div id="container" class="ui centered aligned container">
+                <div id="dimmer" class="ui active dimmer">
+                    <div class="ui text loader">Daemon offline...</div>
+                </div>
+                <div id="toolbar" class="ui middle aligned centered grid">
+                    <div class="fifteen wide column">
+                        <div id="search-box" class="ui left icon input">
+                            <i class="search icon"></i>
+                            <input id="search-input" type="text" placeholder="Surf Kubernetes resources...">
+                        </div>
+                    </div>
+                    <div class="right aligned column">
+                        <a href="https://github.com/c6o/surf" target="_blank">
+                            <i class="large github icon"></i>
+                        </a>
+                        <a href="https://discord.gg/wx3JkVjTPy" target="_blank">
+                            <i class="large discord icon"></i>
+                            <!--img class="discord-alt" src="/icons/vendor/discord.svg"/-->
+                        </a>
+                    </div>
+                </div>
+                <div id="data-dump"></div>
+
+                <div id="terminal-dimmer" class="ui page dimmer">
+                    <div id="terminal-header" class="header"></div>
+                    <div id="terminal" class="content"></div>
+                </div>
+            </div>
+        </div>
+        <script type='module' src='/index.js'></script>
+    </body>
+</html>

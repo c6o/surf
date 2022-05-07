@@ -1,39 +1,28 @@
 # Node stuff
 .npmrc
-node_modules/
+node_modules
 lerna-debug.log
 npm-debug.log
 yarn-error.log
 package-lock.json
 .idea
-**/yarn-audit*
-**/yarn-deprecations*
 
-# tsc
+# tsc and build output
+packages/**/lib
 tsconfig.tsbuildinfo
 
-# kubeconfig files
-*-kubeconfig.yaml
-*-kubeconfig.yml
-
-# Happens when you forget to set the port env variable
+# Gets created when servers are run in production and PORT environment is not set
 PORT
-
-# git secrets
-.gitsecret/keys/random_seed
-# Secrets should not be checked in
-**/*.secret.*
-!**.secret
-
-# testing stuff
-coverage
-depends.svg
-html-report
 
 # outputs
 lib
-tmp
 
-# Mac crap
-.DS_Store
+# dev certs
+ssl
 
+**/yarn-audit*
+**/yarn-deprecations*
+**/bin/*
+
+# temp
+icons
