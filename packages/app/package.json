@@ -21,8 +21,9 @@
   },
   "scripts": {
     "start": "http-server ./lib -S -C ../../ssl/cert.pem -K ../../ssl/key.pem -p 3000 -r",
-    "bundle": "czbundle -d",
-    "start-bundle": "czbundle -s"
+    "gen-sha": "git rev-parse --short=7 HEAD | sed 's/.*/export const gitSHA=\"&\"/' > lib/sha.js",
+    "bundle": "czbundle -d && yarn gen-sha",
+    "start-bundle": "czbundle -s && yarn gen-sha"
   },
   "devDependencies": {
     "@alenaksu/json-viewer": "^1.0.0",
