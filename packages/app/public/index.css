@@ -1,0 +1,320 @@
+/* General styles */
+
+html, body {
+    height: 100%;
+}
+
+.full-height {
+    height: 100%;
+}
+
+/* Online */
+
+#search-box {
+    width: 100%;
+}
+
+#search-input {
+    border-left: 0 none !important;
+    border-top: 0 none !important;
+    border-right: 0 none !important;
+    border-radius: 0% !important;
+    box-shadow: none;
+}
+
+#toolbar {
+    margin-bottom: -3pt !important;
+}
+
+.c6o-panel {
+    background-color: lightgrey;
+}
+
+.logo {
+    height: 40px;
+    margin-right: 12px;
+    width: 40px;
+}
+
+tr {
+    cursor: pointer;
+}
+
+pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+#result-grid {
+    height: inherit;
+}
+
+#json {
+    height: 100%;
+}
+
+@-webkit-keyframes changed {
+    from { background-color: #FAE170; }
+    to { background-color: inherit; }
+}
+@-moz-keyframes changed {
+    from { background-color: #FAE170; }
+    to { background-color: inherit; }
+}
+@-o-keyframes changed {
+    from { background-color: #FAE170; }
+    to { background-color: inherit; }
+}
+@keyframes changed {
+    from { background-color: #FAE170; }
+    to { background-color: inherit; }
+}
+
+.changed {
+    -webkit-animation: changed 5s; /* Safari 4+ */
+    -moz-animation:    changed 5s; /* Fx 5+ */
+    -o-animation:      changed 5s; /* Opera 12+ */
+    animation:         changed 5s; /* IE 10+ */
+}
+
+#terminal {
+    height: 100%;
+    width: 100%;
+}
+
+.discord-alt {
+    height: 20px;
+    width: 20px;
+}
+
+/* Onboarding */
+
+#dimmer {
+    background-color: #262626;
+    overflow-y: auto;
+}
+
+#dimmer #dimmer-content {
+    padding: 10px 0;
+    width: 100%;
+}
+
+#dimmer #header {
+    margin-bottom: 25px;
+}
+
+#dimmer #header #logo {
+    width: 80px !important;
+}
+
+#dimmer #header .item {
+    text-align: left;
+}
+
+#dimmer #links a {
+    color: white;
+}
+
+#dimmer .offline-spinner {
+    position: relative;
+    transform: none;
+    top: 0;
+    left: 0;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.brand {
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    line-height: 1.05rem;
+    color:white;
+}
+
+.brand .faded {
+    margin-top: 3px;
+    opacity: .8;
+    font-size: .9rem;
+    display: inline-block;
+}
+
+#main,
+#sticky-wrapper {
+    position: relative;
+}
+
+#scroll-wrapper {
+    padding-top: 20px;
+    max-height: 70vh;
+    min-height: 580px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+#scroll-wrapper::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}
+
+#scroll-wrapper h1 {
+    margin-top: 10px;
+}
+
+#right-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.sticky {
+    position: absolute;
+    right: -100px;
+    max-width: 520px;
+}
+
+.get-started {
+    flex-grow: 1;
+}
+
+.message.code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2rem;
+    margin: 40px 0;
+    background-color: #ccc;
+    text-align: left;
+    overflow-wrap: break-word;
+    position: relative;
+    padding-right: 52px;
+}
+
+.copy-command {
+    z-index: 200;
+}
+
+.supported-logos .ui.image {
+    width: 50px;
+    height: auto;
+}
+
+.supported-arch {
+    opacity: .5;
+}
+
+.supported-arch .icon {
+    margin-left: 0.75rem;
+}
+
+.copy-command {
+    position: absolute;
+    right: 0px;
+    top: 8px;
+}
+
+.basic.segment.aligned p {
+    max-width: 70%;
+    margin-bottom: 20px;
+}
+
+.basic.segment.right.aligned p {
+    float: right;
+}
+
+#dimmer #footer {
+    font-size: .9rem;
+    letter-spacing: 1px;
+    margin-top: 60px;
+}
+
+#dimmer #footer a {
+    color: white;
+}
+
+#dimmer #footer .logo {
+    width: 15px;
+    height: auto;
+    margin: 0 2px;
+}
+
+#gradient-top {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 30px;
+    background-image: linear-gradient(rgba(38,38,38,1), rgba(38,38,38,0));
+    z-index: 100;
+}
+
+#gradient-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 30px;
+    background-image: linear-gradient(rgba(38,38,38,0), rgba(38,38,38,1));
+    z-index: 100;
+}
+
+@media only screen and (min-width: 1270px) and (max-width: 1499px) {
+    .sticky {
+        right: -50px;
+        max-width: 500px;
+    }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1269px) {
+    .sticky {
+        max-width: 450px;
+        right: -20px;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .sticky {
+        max-width: 400px;
+        right: -20px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .sticky {
+        max-width: 320px;
+        right: 0px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .sticky {
+        display: block;
+    }
+
+    .mobile {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .sticky {
+        display: none;
+    }
+
+    .mobile {
+        display: block;
+    }
+}
+
+@media only screen and (max-height: 825px) {
+    #dimmer #dimmer-content {
+        position: absolute;
+        top: 20px;
+        min-height: 825px;
+    }
+}

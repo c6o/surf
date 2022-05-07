@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/png" href="/icons/favicon.ico" />
+
+        <script src="//unpkg.com/jquery@3.6.0/dist/jquery.js"></script>
+        <link rel="stylesheet" href="//unpkg.com/fomantic-ui@2.8.8/dist/semantic.min.css">
+        <script src="//unpkg.com/fomantic-ui@2.8.8/dist/semantic.js"></script>
+
+        <script src="//unpkg.com/@feathersjs/client@^4.5.14/dist/feathers.js"></script>
+        <script src="//cdn.socket.io/socket.io-2.3.0.js"></script>
+
+        <script type="module" src="//unpkg.com/@alenaksu/json-viewer@1.0.0/dist/json-viewer.js"></script>
+        <script src="//unpkg.com/hotkeys-js@3.9.3/dist/hotkeys.min.js"></script>
+        <script src="//unpkg.com/dayjs@1.11.1/dayjs.min.js"></script>
+        <script src="//unpkg.com/dayjs@1.11.1/plugin/relativeTime"></script>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/hmac-md5.min.js" integrity="sha512-gy8JaBxTrtIxNLe1FfMAXey61VjQk3Af4EyY/EpVfmWPH16iCgdRZMHEFgKIyxMrarlc6+rDf6WneGL4SWqnpg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <!--link rel="stylesheet" href="//unpkg.com/xterm/css/xterm.css" />
+        <script src="//unpkg.com/xterm/lib/xterm.js"></script>
+        <script src="//unpkg.com/xterm-addon-fit/lib/xterm-addon-fit.js"></script-->
+
+        <link rel="stylesheet" href="//unpkg.com/xterm@4.18.0/css/xterm.css" />
+        <script src="//unpkg.com/xterm@4.18.0/lib/xterm.js"></script>
+        <script src="//unpkg.com/xterm-addon-fit@0.5.0/lib/xterm-addon-fit.js"></script>
+
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="stylesheet" href="/index.css" />
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-B5ZXER6WT3"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-B5ZXER6WT3');
+        </script>
+    </head>
+    <body>
+        <div id="sidebar" class="ui very wide right sidebar">
+            <json-viewer id="json" data="{}"></json-viewer>
+        </div>
+
+        <!-- Daemon offline - onboarding content -->
+        <div id="dimmer" class="ui active page dimmer">
+            <div id="dimmer-content" class="content">
+                <div class="ui fluid container">
+                    <div id="header" class="ui four column grid middle aligned">
+                        <div class="one wide column"></div>
+                        <div class="eight wide column">
+                            <div class="ui items unstackable">
+                                <div class="item">
+                                    <div id="logo" class="ui image tiny">
+                                        <img src="/icons/surf-logo.svg">
+                                    </div>
+                                    <div class="middle aligned content">
+                                        <div class="brand">
+                                            SURF<br />
+                                            <span class="faded">for<br />Kubernetes</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="links" class="six wide right aligned column">
+                            <a href="https://github.com/c6o/surf" target="_blank">
+                                <i class="large github icon"></i>
+                            </a>
+                            <a href="https://discord.gg/wx3JkVjTPy" target="_blank">
+                                <i class="large discord icon"></i>
+                            </a>
+                        </div>
+                        <div class="one wide column"></div>
+                    </div>
+                </div>
+                <div id="main" class="ui fluid container">
+                    <div id="gradient-top"></div>
+                    <div id="gradient-bottom"></div>
+                    <div id="sticky-wrapper" class="ui container">
+                        <div class="sticky">
+                            <div class="offline-spinner ui text active elastic loader">Waiting for daemon...</div>
+                            <div class="get-started ui basic segment">
+                                <span class="ui inverted">
+                                    <h3>Available May 16</h3>
+                                    <p>The web app requires the free CodeZero Desktop daemon in order to securely access your Kubernetes clusters.</p>
+                                    <p></p>Copy and run the following commands to install and start the daemon:</p>
+                                </span>
+                                <div class="ui message code inverted">
+                                    <div
+                                        class="copy-command ui icon button"
+                                        data-title="Copied to clipboard"
+                                        data-content="Paste and run in your terminal"
+                                        data-position="top left"
+                                    >
+                                        <i class="clipboard icon"></i>
+                                    </div>
+                                    <span class="command">> curl -L https://releases.codezero.io/install-headless.sh | /bin/bash</span>
+                                    <br />
+                                    <br />
+                                    <span class="command">> czctl start</span>
+                                </div>
+                                <div class="supported-logos ui four column centered grid padded">
+                                    <div class="column">
+                                        <img class="ui centered image mini" src="/icons/vendor/apple-white.svg">
+                                    </div>
+                                    <div class="column">
+                                        <img class="ui centered image mini" src="/icons/vendor/linux-white.svg">
+                                    </div>
+                                </div>
+                                <h3 class="supported-arch ui header inverted">
+                                    x64 <i class="small heart icon"></i> arm64
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="scroll-wrapper" class="ui fluid container">
+                        <div class="ui four column stackable grid">
+                            <div class="one wide column"></div>
+                            <div id="left-column" class="eight wide column">
+                                <div class="ui basic segment left aligned">
+                                    <h1 class="ui header inverted">
+                                        Rich, simple querying
+                                    </h1>
+                                    <p>
+                                        Surf provides a keyboard friendly interface combining rich but simple querying that instantly delivers results across multiple Kubernetes Resources.
+                                    </p>
+                                    <div class="ui image">
+                                        <img src="/img/deploy-svc-pvc.png">
+                                    </div>
+                                </div>
+                                <div class="ui basic segment right aligned">
+                                    <h1 class="ui header inverted">
+                                        ...including wildcard searches
+                                    </h1>
+                                    <p>
+                                        Use wildcards for partial matches and even query fields that are off limits using kubectl.
+                                    </p>
+                                    <div class="ui image">
+                                        <img src="/img/wildcard.png">
+                                    </div>
+                                </div>
+                                <div class="ui basic segment left aligned">
+                                    <h1 class="ui header inverted">
+                                        Hot results
+                                    </h1>
+                                    <p>
+                                        Highlighted real-time results make issues and changes stand out.
+                                    </p>
+                                    <div class="ui image">
+                                        <img src="/img/hot-results.png">
+                                    </div>
+                                </div>
+                                <div class="ui basic segment right aligned">
+                                    <h1 class="ui header inverted">
+                                        Open-source extensible UI
+                                    </h1>
+                                    <p>
+                                        Explore resource details, dig into Pod logs and more to come...
+                                    </p>
+                                    <div class="ui image">
+                                        <img src="/img/extensible.png">
+                                    </div>
+                                </div>
+                                <div class="ui basic segment left aligned">
+                                    <h1 class="ui header inverted">
+                                        Collaborate with teammates
+                                    </h1>
+                                    <p>
+                                        Whether you are sharing queries, real-time results or running Intercept or Teleport sessions, your team members are right there with you in the cluster.
+                                    </p>
+                                    <div class="ui image">
+                                        <img src="/img/collab.png">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="right-column" class="six wide column">
+                                <div class="mobile"></div>
+                            </div>
+                            <div class="one wide column"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="footer" class="ui container">
+                    <!--span class="brand">
+                        SURF <span class="faded">// for Kubernetes</span>
+                    </span-->
+                    <span>
+                        <a href="https://codezero.io" target="_blank">
+                            <img class="logo" src="/icons/codezero.svg">
+                            CodeZero
+                        </a>
+                    </span>
+                    <span class="faded">
+                        | &copy; <script type="text/javascript">document.write(new Date().getFullYear());</script>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daemon online -->
+        <div class="ui fluid container full-height">
+            <div id="toolbar" class="ui middle aligned centered grid">
+                <div class="fourteen wide column">
+                    <div id="search-box" class="ui left icon input">
+                        <i class="search icon"></i>
+                        <input id="search-input" type="text" placeholder="Surf Kubernetes resources...">
+                    </div>
+                </div>
+                <div class="two wide right aligned column">
+                    <a href="https://github.com/c6o/surf" target="_blank">
+                        <i class="large github icon"></i>
+                    </a>
+                    <a href="https://discord.gg/wx3JkVjTPy" target="_blank">
+                        <i class="large discord icon"></i>
+                        <!--img class="discord-alt" src="/icons/vendor/discord.svg"/-->
+                    </a>
+                </div>
+            </div>
+            <div id="data-dump"></div>
+
+            <div id="terminal-dimmer" class="ui page dimmer">
+                <div id="terminal-header" class="header"></div>
+                <div id="terminal" class="content"></div>
+            </div>
+        </div>
+
+        <script type='module' src='/index.js'></script>
+    </body>
+</html>

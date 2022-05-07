@@ -1,9 +1,15 @@
 {
-  "name": "surf-root",
+  "name": "@c6o/surf-root",
   "version": "0.0.1",
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "build": "tsc -b",
+    "bundle": "yarn workspaces run bundle",
+    "start": "yarn workspaces run start",
+    "generate-certs": "mkdir -p ssl && mkcert -client -key-file ssl/key.pem -cert-file ssl/cert.pem localhost 127.0.0.1 && cp \"$(mkcert -CAROOT)/rootCA.pem\" ssl/ca.pem"
+  },
   "description": "Surf for Kubernetes by CodeZero",
   "repository": "git@github.com:c6o/surf.git",
   "author": "Narayan Sainaney <narayan@codezero.io>",

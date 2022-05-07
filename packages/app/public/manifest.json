@@ -1,0 +1,23 @@
+{
+    "name": "Surf",
+    "short_name": "Surf",
+    "description": "Surf for Kubernetes by CodeZero",
+    "start_url": "/index.html",
+    "id": "./index.html",
+    "display": "minimal-ui",
+    "scope": "/",
+    "icons": [
+        {
+            "src": "./icons/surf-icon.png",
+            "type": "image/png",
+            "purpose": "maskable any",
+            "sizes": "192x192"
+        },
+        {
+            "src": "./icons/surf-logo.svg",
+            "type": "image/svg+xml",
+            "purpose": "maskable any",
+            "sizes": "any"
+        }
+    ]
+}

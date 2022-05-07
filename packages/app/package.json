@@ -1,0 +1,46 @@
+{
+  "name": "@c6o/surf-app",
+  "version": "0.0.1",
+  "description": "Web",
+  "main": "index.html",
+  "repository": "git@github.com:c6o/surf.git",
+  "author": "Narayan Sainaney <narayan@codezero.io>",
+  "license": "Apache-2.0",
+  "private": true,
+  "workspaces": {
+    "nohoist": [
+      "fomantic-ui",
+      "fomantic-ui/**",
+      "fomantic-ui-sass",
+      "fomantic-ui-sass/**",
+      "jsonpath-plus",
+      "jsonpath-plus/**",
+      "xterm",
+      "xterm/**"
+    ]
+  },
+  "scripts": {
+    "start": "http-server ./lib -S -C ../../ssl/cert.pem -K ../../ssl/key.pem -p 3000 -r",
+    "bundle": "czbundle -d",
+    "start-bundle": "czbundle -s"
+  },
+  "devDependencies": {
+    "@alenaksu/json-viewer": "^1.0.0",
+    "@c6o/bundle": "^0.0.14",
+    "@feathersjs/client": "4.5.14",
+    "@feathersjs/feathers": "^4.5.12",
+    "@feathersjs/socketio-client": "^4.5.14",
+    "@types/crypto-js": "^4.1.1",
+    "@types/jquery": "^3.5.14",
+    "dayjs": "^1.11.1",
+    "fomantic-ui": "^2.9.0-beta.286",
+    "hotkeys-js": "^3.9.3",
+    "http-server": "^14.1.0",
+    "jquery": "^3.6.0",
+    "jsonpath-plus": "^6.0.1",
+    "socket.io-client": "^2.4.0",
+    "xterm": "^4.18.0",
+    "xterm-addon-fit": "^0.5.0"
+  }
+
+}
