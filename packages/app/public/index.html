@@ -27,125 +27,197 @@
         <script src="//unpkg.com/xterm@4.18.0/lib/xterm.js"></script>
         <script src="//unpkg.com/xterm-addon-fit@0.5.0/lib/xterm-addon-fit.js"></script>
 
-
         <link rel="manifest" href="/manifest.json" />
-        <style>
-            #container {
-                padding-bottom: 10px;
-                padding-top: 10px;
-                padding-left:10px;
-                padding-right:10px;
-                height: 100%;
-                width: auto !important;
-            }
-            #search-box {
-                width: 100%;
-            }
-            #search-input {
-                border-left: 0 none !important;
-                border-top: 0 none !important;
-                border-right: 0 none !important;
-                border-radius: 0% !important;
-                box-shadow: none;
-            }
-            #toolbar {
-                margin-bottom: -3pt !important;
-            }
-            .c6o-panel { background-color: lightgrey; }
-            .logo {
-                height: 40px;
-                margin-right: 12px;
-                width: 40px;
-            }
-            tr {
-                cursor: pointer;
-            }
-            .active {
-                background-color: cornflowerblue;
-            }
-            pre {
-                white-space: pre-wrap;       /* Since CSS 2.1 */
-                white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-                white-space: -pre-wrap;      /* Opera 4-6 */
-                white-space: -o-pre-wrap;    /* Opera 7 */
-                word-wrap: break-word;       /* Internet Explorer 5.5+ */
-            }
-            section { margin-bottom: 30px; }
-            #result-grid {
-                height: inherit;
-            }
-            #json {
-                height: 100%;
-            }
-
-            @-webkit-keyframes changed {
-                from { background-color: #FAE170; }
-                to { background-color: inherit; }
-            }
-            @-moz-keyframes changed {
-                from { background-color: #FAE170; }
-                to { background-color: inherit; }
-            }
-            @-o-keyframes changed {
-                from { background-color: #FAE170; }
-                to { background-color: inherit; }
-            }
-            @keyframes changed {
-                from { background-color: #FAE170; }
-                to { background-color: inherit; }
-            }
-            .changed {
-                -webkit-animation: changed 5s; /* Safari 4+ */
-                -moz-animation:    changed 5s; /* Fx 5+ */
-                -o-animation:      changed 5s; /* Opera 12+ */
-                animation:         changed 5s; /* IE 10+ */
-            }
-
-            #terminal {
-                height: 100%;
-                width: 100%;
-            }
-
-            .discord-alt {
-                height: 20px;
-                width: 20px;
-            }
-        </style>
+        <link rel="stylesheet" href="/index.css" />
     </head>
     <body>
         <div id="sidebar" class="ui very wide right sidebar">
             <json-viewer id="json" data="{}"></json-viewer>
         </div>
-        <div class="pusher">
-            <div id="container" class="ui centered aligned container">
-                <div id="dimmer" class="ui active dimmer">
-                    <div class="ui text loader">Daemon offline...</div>
+
+        <!-- Daemon offline - onboarding content -->
+        <div id="dimmer" class="ui active page dimmer">
+            <div id="dimmer-content" class="content">
+                <div class="ui fluid container">
+                    <div id="header" class="ui four column grid middle aligned">
+                        <div class="one wide column"></div>
+                        <div class="eight wide column">
+                            <div class="ui items unstackable">
+                                <div class="item">
+                                    <div id="logo" class="ui image tiny">
+                                        <img src="/icons/surf-logo.svg">
+                                    </div>
+                                    <div class="middle aligned content">
+                                        <div class="brand">
+                                            SURF<br />
+                                            <span class="faded">for<br />Kubernetes</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="links" class="six wide right aligned column">
+                            <a href="https://github.com/c6o/surf" target="_blank">
+                                <i class="large github icon"></i>
+                            </a>
+                            <a href="https://discord.gg/wx3JkVjTPy" target="_blank">
+                                <i class="large discord icon"></i>
+                            </a>
+                        </div>
+                        <div class="one wide column"></div>
+                    </div>
                 </div>
-                <div id="toolbar" class="ui middle aligned centered grid">
-                    <div class="fifteen wide column">
-                        <div id="search-box" class="ui left icon input">
-                            <i class="search icon"></i>
-                            <input id="search-input" type="text" placeholder="Surf Kubernetes resources...">
+                <div id="main" class="ui fluid container">
+                    <div id="gradient-top"></div>
+                    <div id="gradient-bottom"></div>
+                    <div id="sticky-wrapper" class="ui container">
+                        <div class="sticky">
+                            <div class="offline-spinner ui text active elastic loader">Waiting for daemon...</div>
+                            <div class="get-started ui basic segment">
+                                <span class="ui inverted">
+                                    <h3>Available May 16</h3>
+                                    <p>The web app requires the free CodeZero Desktop daemon in order to securely access your Kubernetes clusters.</p>
+                                    <p></p>Copy and run the following commands to install and start the daemon:</p>
+                                </span>
+                                <div class="ui message code inverted">
+                                    <div
+                                        class="copy-command ui icon button"
+                                        data-title="Copied to clipboard"
+                                        data-content="Paste and run in your terminal"
+                                        data-position="top left"
+                                    >
+                                        <i class="clipboard icon"></i>
+                                    </div>
+                                    <span class="command">> curl -L https://releases.codezero.io/install-headless.sh | /bin/bash</span>
+                                    <br />
+                                    <br />
+                                    <span class="command">> czctl start</span>
+                                </div>
+                                <div class="supported-logos ui four column centered grid padded">
+                                    <div class="column">
+                                        <img class="ui centered image mini" src="/icons/vendor/apple-white.svg">
+                                    </div>
+                                    <div class="column">
+                                        <img class="ui centered image mini" src="/icons/vendor/linux-white.svg">
+                                    </div>
+                                </div>
+                                <h3 class="supported-arch ui header inverted">
+                                    x64 <i class="small heart icon"></i> arm64
+                                </h3>
+                            </div>
                         </div>
                     </div>
-                    <div class="right aligned column">
-                        <a href="https://github.com/c6o/surf" target="_blank">
-                            <i class="large github icon"></i>
-                        </a>
-                        <a href="https://discord.gg/wx3JkVjTPy" target="_blank">
-                            <i class="large discord icon"></i>
-                            <!--img class="discord-alt" src="/icons/vendor/discord.svg"/-->
-                        </a>
+                    <div id="scroll-wrapper" class="ui fluid container">
+                        <div class="ui four column stackable grid">
+                            <div class="one wide column"></div>
+                            <div id="left-column" class="eight wide column">
+                                <div class="ui basic segment left aligned">
+                                    <h1 class="ui header inverted">
+                                        Rich, simple querying
+                                    </h1>
+                                    <p>
+                                        Surf provides a keyboard friendly interface combining rich but simple querying that instantly delivers results across multiple Kubernetes Resources.
+                                    </p>
+                                    <div class="ui image">
+                                        <img src="/img/deploy-svc-pvc.png">
+                                    </div>
+                                </div>
+                                <div class="ui basic segment right aligned">
+                                    <h1 class="ui header inverted">
+                                        ...including wildcard searches
+                                    </h1>
+                                    <p>
+                                        Use wildcards for partial matches and even query fields that are off limits using kubectl.
+                                    </p>
+                                    <div class="ui image">
+                                        <img src="/img/wildcard.png">
+                                    </div>
+                                </div>
+                                <div class="ui basic segment left aligned">
+                                    <h1 class="ui header inverted">
+                                        Hot results
+                                    </h1>
+                                    <p>
+                                        Highlighted real-time results make issues and changes stand out.
+                                    </p>
+                                    <div class="ui image">
+                                        <img src="/img/hot-results.png">
+                                    </div>
+                                </div>
+                                <div class="ui basic segment right aligned">
+                                    <h1 class="ui header inverted">
+                                        Open-source extensible UI
+                                    </h1>
+                                    <p>
+                                        Explore resource details, dig into Pod logs and more to come...
+                                    </p>
+                                    <div class="ui image">
+                                        <img src="/img/extensible.png">
+                                    </div>
+                                </div>
+                                <div class="ui basic segment left aligned">
+                                    <h1 class="ui header inverted">
+                                        Collaborate with teammates
+                                    </h1>
+                                    <p>
+                                        Whether you are sharing queries, real-time results or running Intercept or Teleport sessions, your team members will feel right there with you in the cluster.
+                                    </p>
+                                    <div class="ui image">
+                                        <img src="/img/collab.png">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="right-column" class="six wide column">
+                                <div class="mobile"></div>
+                            </div>
+                            <div class="one wide column"></div>
+                        </div>
                     </div>
                 </div>
-                <div id="data-dump"></div>
-
-                <div id="terminal-dimmer" class="ui page dimmer">
-                    <div id="terminal-header" class="header"></div>
-                    <div id="terminal" class="content"></div>
+                <div id="footer" class="ui container">
+                    <!--span class="brand">
+                        SURF <span class="faded">// for Kubernetes</span>
+                    </span-->
+                    <span>
+                        <a href="https://codezero.io" target="_blank">
+                            <img class="logo" src="/icons/codezero.svg">
+                            CodeZero
+                        </a>
+                    </span>
+                    <span class="faded">
+                        | &copy; <script type="text/javascript">document.write(new Date().getFullYear());</script>
+                    </span>
                 </div>
             </div>
         </div>
+
+        <!-- Daemon online -->
+        <div class="ui fluid container full-height">
+            <div id="toolbar" class="ui middle aligned centered grid">
+                <div class="fourteen wide column">
+                    <div id="search-box" class="ui left icon input">
+                        <i class="search icon"></i>
+                        <input id="search-input" type="text" placeholder="Surf Kubernetes resources...">
+                    </div>
+                </div>
+                <div class="two wide right aligned column">
+                    <a href="https://github.com/c6o/surf" target="_blank">
+                        <i class="large github icon"></i>
+                    </a>
+                    <a href="https://discord.gg/wx3JkVjTPy" target="_blank">
+                        <i class="large discord icon"></i>
+                        <!--img class="discord-alt" src="/icons/vendor/discord.svg"/-->
+                    </a>
+                </div>
+            </div>
+            <div id="data-dump"></div>
+
+            <div id="terminal-dimmer" class="ui page dimmer">
+                <div id="terminal-header" class="header"></div>
+                <div id="terminal" class="content"></div>
+            </div>
+        </div>
+
         <script type='module' src='/index.js'></script>
     </body>
 </html>

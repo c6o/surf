@@ -23,6 +23,3 @@ ssl
 **/yarn-audit*
 **/yarn-deprecations*
 **/bin/*
-
-# temp
-icons

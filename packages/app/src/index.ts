@@ -17,6 +17,7 @@ declare global {
     interface JQuery<TElement = HTMLElement> extends Iterable<TElement> {
         sidebar: any
         dimmer: any
+        popup: any
     }
 }
 
@@ -384,21 +385,7 @@ const searchInputKeydown = async (e) => {
 
 }
 
-const searchClicked = async () => await doSearch($('#search-input').val())
-
-const authenticate = async () => {
-    try {
-        const tokenResult = await fetch('https://127.0.0.1:5051/api/token', { method: 'POST' })
-        return await tokenResult.json()
-    }
-    catch {
-
-    }
-}
-
 const initFeathers = () => {
-    //const socket = io(`wss://127.0.0.1:5051`, {
-    //const socket = io(`ws://127.0.0.1:5050`, {
      const socket = io(`ws://${daemonURL}`, {
         transports: ['websocket'],
         path: '/api/ws/',
@@ -545,12 +532,10 @@ if (false && 'serviceWorker' in navigator) {
     })
 }
 
-$(document).ready(async () => {
-    console.log('HELLO-THERE')
-    await window.customElements.whenDefined('json-viewer')
+$(async () => {
     console.log('READY')
+    await window.customElements.whenDefined('json-viewer')
 
-    await authenticate()
     initFeathers()
     initWatches()
     initHotKeys()
@@ -558,8 +543,21 @@ $(document).ready(async () => {
     //$(document).on('click', "#search-button", searchClicked)
     $(document).on('keydown', '#search-input', searchInputKeydown)
     $('#json')[0].shadowRoot.addEventListener('dblclick', jsonDblClick)
-
     window.addEventListener('popstate', async (event) => await doSearch(event.state?.s, event.state?.p, true, false))
+
+    const hidePopup = () => $('.copy-command').popup('hide')
+    // copy the sticky HTML into the mobile-only part.
+    // This needs to come before the copy-command events
+    $('.mobile').html($('.sticky').html())
+    $('.copy-command')
+        .popup({
+            on: 'click'
+        })
+        .click(() => {
+            const install = 'curl -L https://releases.codezero.io/install-headless.sh | /bin/bash && czctl start'
+            navigator.clipboard.writeText(install)
+            setTimeout(hidePopup, 3500)
+        })
 
     const params = new URLSearchParams(document.location.search)
     const searchString = params.get('s')

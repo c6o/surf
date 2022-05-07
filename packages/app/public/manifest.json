@@ -8,13 +8,13 @@
     "scope": "/",
     "icons": [
         {
-            "src": "./icons/white-orange-192.png",
+            "src": "./icons/surf-icon.png",
             "type": "image/png",
             "purpose": "maskable any",
             "sizes": "192x192"
         },
         {
-            "src": "./icons/surf-white.svg",
+            "src": "./icons/surf-logo.svg",
             "type": "image/svg+xml",
             "purpose": "maskable any",
             "sizes": "any"
