@@ -554,7 +554,7 @@ $(async () => {
             on: 'click'
         })
         .click(() => {
-            const install = 'curl -L https://releases.codezero.io/install-headless.sh | /bin/bash && czctl start'
+            const install = 'curl -L https://get.c6o.io | /bin/bash && czctl start'
             navigator.clipboard.writeText(install)
             setTimeout(hidePopup, 3500)
         })
