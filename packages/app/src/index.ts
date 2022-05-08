@@ -1,4 +1,5 @@
 import { CZConfig, jp, types } from './config.js'
+import { renderHelpPage } from './null'
 
 declare var io: typeof import('socket.io-client')
 declare var hotkeys: typeof import('hotkeys-js').default
@@ -288,7 +289,10 @@ const rowClicked = (e) => {
 
 const refresh = () => {
     selectedItem = null
-    $('#data-dump').html(renderResult())
+    $('#data-dump').html(result?.total ? 
+        renderResult() :
+        renderHelpPage(true)
+    )
     $('.k8s tbody').on('click', 'tr', rowClicked)
 
     const jsonTree = document.querySelector<any>('#json')
@@ -542,6 +546,7 @@ $(async () => {
 
     //$(document).on('click', "#search-button", searchClicked)
     $(document).on('keydown', '#search-input', searchInputKeydown)
+    $('#data-dump').html(renderHelpPage())
     $('#json')[0].shadowRoot.addEventListener('dblclick', jsonDblClick)
     window.addEventListener('popstate', async (event) => await doSearch(event.state?.s, event.state?.p, true, false))
 
