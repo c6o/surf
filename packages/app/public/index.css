@@ -107,7 +107,7 @@ section {
 }
 
 #dimmer #header {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 #dimmer #header #logo {
@@ -139,7 +139,7 @@ section {
 }
 
 .brand .faded {
-    margin-top: 3px;
+    margin-top: 5px;
 }
 
 .faded {
@@ -154,7 +154,6 @@ section {
 }
 
 #scroll-wrapper {
-    padding-top: 20px;
     max-height: 70vh;
     min-height: 580px;
     overflow-y: auto;
@@ -217,12 +216,11 @@ section {
 
 .copy-command {
     position: absolute;
-    right: 0px;
-    top: 8px;
+    right: 3px;
+    top: 7px;
 }
 
 .basic.segment.aligned p {
-    max-width: 70%;
     margin-bottom: 20px;
 }
 
@@ -232,7 +230,6 @@ section {
 
 #dimmer #footer {
     font-size: .9rem;
-    letter-spacing: 1px;
     margin-top: 60px;
 }
 
@@ -295,8 +292,20 @@ section {
 }
 
 @media only screen and (min-width: 768px) {
+    #dimmer #header {
+        margin-bottom: 25px;
+    }
+
+    #scroll-wrapper {
+        padding-top: 20px;
+    }
+
     .sticky {
         display: block;
+    }
+
+    .basic.segment.aligned p {
+        max-width: 80%;
     }
 
     .mobile {
