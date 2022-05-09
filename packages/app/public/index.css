@@ -140,6 +140,9 @@ section {
 
 .brand .faded {
     margin-top: 3px;
+}
+
+.faded {
     opacity: .8;
     font-size: .9rem;
     display: inline-block;

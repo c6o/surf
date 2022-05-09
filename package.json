@@ -14,5 +14,8 @@
   "repository": "git@github.com:c6o/surf.git",
   "author": "Narayan Sainaney <narayan@codezero.io>",
   "license": "Apache-2.0",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "@types/jquery": "^3.5.14"
+  }
 }
