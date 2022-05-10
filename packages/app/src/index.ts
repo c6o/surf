@@ -23,7 +23,7 @@ declare global {
 
 dayjs.extend(window.dayjs_plugin_relativeTime)
 
-const daemonURL = 'localhost:5050'
+const daemonURL = 'localhost:3070'
 
 let result
 let lastQueryId
@@ -399,7 +399,7 @@ const initFeathers = () => {
     socket.on('connect', () => $('#dimmer').removeClass('active'))
     socket.on('disconnect', () => $('#dimmer').addClass('active'))
 
-    queryService = client.service('api/query')
+    queryService = client.service('api/surf/query')
 }
 
 const initWatches = () => {
@@ -481,7 +481,7 @@ const showLogs = (pod) => {
                 `)
 
             const c = containers.length > 1 ? `&c=${containers[0]}` : ''
-            const result = await fetch(`http://${daemonURL}/api/logs?ns=${ns}&n=${n}${c}`)
+            const result = await fetch(`http://${daemonURL}/api/surf/logs?ns=${ns}&n=${n}${c}`)
             reader = result.body.getReader()
             await pipeLogData()
         }
