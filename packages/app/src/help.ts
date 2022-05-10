@@ -164,6 +164,32 @@ export const renderHelpPage = (noResults = false) => `
                 </div>
                 <div class="column">
                     <h2>Shortcuts</h2>
+                    <div class="ui aligned padded grid">
+                        <div class="two column row">
+                            <div class="left aligned column">
+                                :
+                            </div>
+                            <div class="right aligned column">
+                                Select the search bar
+                            </div>
+                        </div>
+                        <div class="two column row">
+                            <div class="left aligned column">
+                                i
+                            </div>
+                            <div class="right aligned column">
+                                Show details of a resource
+                            </div>
+                        </div>
+                        <div class="two column row">
+                            <div class="left aligned column">
+                                l
+                            </div>
+                            <div class="right aligned column">
+                                Show logs for a selected Pod
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
