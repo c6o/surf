@@ -1,5 +1,5 @@
 import { CZConfig, jp, types } from './config.js'
-import { renderHelpPage } from './null'
+import { renderHelpPage } from './help'
 
 declare var io: typeof import('socket.io-client')
 declare var hotkeys: typeof import('hotkeys-js').default
