@@ -8,6 +8,7 @@
     "build": "tsc -b",
     "bundle": "yarn workspaces run bundle",
     "start": "yarn workspaces run start",
+    "deploy": "yarn workspaces run deploy",
     "generate-certs": "mkdir -p ssl && mkcert -client -key-file ssl/key.pem -cert-file ssl/cert.pem localhost 127.0.0.1 && cp \"$(mkcert -CAROOT)/rootCA.pem\" ssl/ca.pem"
   },
   "description": "Surf for Kubernetes by CodeZero",

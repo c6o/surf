@@ -20,10 +20,6 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/hmac-md5.min.js" integrity="sha512-gy8JaBxTrtIxNLe1FfMAXey61VjQk3Af4EyY/EpVfmWPH16iCgdRZMHEFgKIyxMrarlc6+rDf6WneGL4SWqnpg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-        <!--link rel="stylesheet" href="//unpkg.com/xterm/css/xterm.css" />
-        <script src="//unpkg.com/xterm/lib/xterm.js"></script>
-        <script src="//unpkg.com/xterm-addon-fit/lib/xterm-addon-fit.js"></script-->
-
         <link rel="stylesheet" href="//unpkg.com/xterm@4.18.0/css/xterm.css" />
         <script src="//unpkg.com/xterm@4.18.0/lib/xterm.js"></script>
         <script src="//unpkg.com/xterm-addon-fit@0.5.0/lib/xterm-addon-fit.js"></script>
@@ -32,13 +28,16 @@
         <link rel="stylesheet" href="/index.css" />
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-B5ZXER6WT3"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=#GTAG_ID"></script>
         <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
+            // Don't pollute analytics with dev data
+            if ('#GTAG_ID'.startsWith('G-')) {
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
 
-            gtag('config', 'G-B5ZXER6WT3');
+                gtag('config', '#GTAG_ID');
+            }
         </script>
     </head>
     <body>
