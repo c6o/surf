@@ -1,5 +1,5 @@
 import { CZConfig, jp, types } from './config.js'
-import { renderHelpPage } from './help'
+import { renderHelpPage, initHelp, placeHelpModal } from './help'
 
 declare var io: typeof import('socket.io-client')
 declare var hotkeys: typeof import('hotkeys-js').default
@@ -496,7 +496,7 @@ const initHotKeys = () => {
     $('search-input').on('focus', () => hotkeys.unbind('shift+;'))
     $('search-input').on('blur', () => hotkeys('shift+;', onSearchKey))
     hotkeys('shift+;', onSearchKey)
-    hotkeys('i', () => {
+    hotkeys('d', () => {
         // const isVisible = $("#sidebar")[0].classList.contains('visible')
         // if (isVisible)
         //     $('.sidebar').sidebar('toggle')
@@ -543,11 +543,14 @@ $(async () => {
     initFeathers()
     initWatches()
     initHotKeys()
+    initHelp()
 
-    //$(document).on('click', "#search-button", searchClicked)
     $(document).on('keydown', '#search-input', searchInputKeydown)
     $('#data-dump').html(renderHelpPage())
     $('#json')[0].shadowRoot.addEventListener('dblclick', jsonDblClick)
+
+    $('#modals-placeholder').html(placeHelpModal())
+
     window.addEventListener('popstate', async (event) => await doSearch(event.state?.s, event.state?.p, true, false))
 
     const hidePopup = () => $('.copy-command').popup('hide')

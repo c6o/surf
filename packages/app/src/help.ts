@@ -1,4 +1,21 @@
 
+declare global {
+    interface JQuery<TElement = HTMLElement> extends Iterable<TElement> {
+        modal: any
+    }
+}
+
+export const initHelp = () => 
+    $('#help-command')
+        .on('click', () => $('#help-modal').modal('show'))
+
+
+export const placeHelpModal = () => `
+    <div id="help-modal" class="ui modal">
+        ${renderHelpPage()}
+    </div>
+`
+
 const queries = [
     [
         'The basics',
@@ -152,9 +169,9 @@ const renderQuerySection = () =>  {
     return result
 }
 
-export const renderHelpPage = (noResults = false) => `
-    <div class="ui container">
-        <h1>${noResults ? 'No results found' : 'Getting Started'}</h1>
+export const renderHelpPage = (title = 'Getting Started') => `
+    <div class="ui raised container segment">
+        <h1>${title}</h1>
         <div class="ui divider"></div>
         <div class="ui aligned padded grid">
             <div class="left aligned two column row">
@@ -178,11 +195,11 @@ export const renderHelpPage = (noResults = false) => `
                         <div class="item">
                             <div class="ui image">
                                 <div class="ui label">
-                                    i
+                                    d
                                 </div>
                             </div>
                             <div class="middle aligned content">
-                                Show details of a resource
+                                Show <b>details</b> of a Resource
                             </div>
                         </div>
                         <div class="item">
@@ -192,7 +209,7 @@ export const renderHelpPage = (noResults = false) => `
                                 </div>
                             </div>
                             <div class="middle aligned content">
-                                Show logs for a selected Pod
+                                Show <b>logs</b> for a selected Pod
                             </div>
                         </div>
                     </div>
