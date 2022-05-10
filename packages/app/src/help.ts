@@ -11,7 +11,7 @@ const queries = [
         You can search by any field across any resource type including array values.
         </p>
         <p>
-        When searching inside arrays, simply treat the property like 
+        When searching inside arrays, simply treat the property like
         any other property. If you are interested in:
             <strong>spec.containers[].name</strong>
         The predicate is simply:
@@ -19,15 +19,15 @@ const queries = [
         </p>
     `
     ],
-    ['Implied fields', 
+    ['Implied fields',
     `
-        Values without a <b>field:</b> prefix imply the <b>kind, metadata.name, and 
-        metadata.namespace</b> properties. The string 
+        Values without a <b>field:</b> prefix imply the <b>kind, metadata.name, and
+        metadata.namespace</b> properties. The string
             <strong>foo</strong>
         is the same as
             <strong>(kind:foo || metadata.name:foo || metadata.namespace:foo)</strong>
     `],
-    ['Field abbreviations', 
+    ['Field abbreviations',
     `
         <p>
         The query <b>k:foo</b> is the same as
@@ -50,17 +50,17 @@ const queries = [
         </p>
 
     `],
-    ['Or based queries', 
+    ['Or based queries',
     `
         <p>
         All <b>spaces</b> imply separate <b>or</b> predicates so:
-            <strong>pod deploy</strong> 
+            <strong>pod deploy</strong>
         is the same as
             <strong>pod || deploy</strong>
         which internally expands to (deep breath):
             <strong>
             (kind:pod || metadata.namespace:pod || metadata.name:pod) ||
-            (kind:deploy || metadata.namespace:deploy || metadata.name:deploy) 
+            (kind:deploy || metadata.namespace:deploy || metadata.name:deploy)
             </strong>
         </p>
         <p>
@@ -73,7 +73,7 @@ const queries = [
         which is not a legal Kubernetes resource name but you get the idea...
     `
     ],
-    ['Use brackets to group predicates', 
+    ['Use brackets to group predicates',
     `
         <p>
         If you are interested in <b>pods</b> and <b>deployments</b> named <b>foo</b> and type:
@@ -84,7 +84,7 @@ const queries = [
                 (
                     (k:pod || n:pod || ns:pod) ||
                     (k:deploy || n:deploy || ns:deploy)
-                ) <br/> 
+                ) <br/>
                 ||  <br/>
                 (n:foo)
             </strong>
@@ -96,7 +96,7 @@ const queries = [
             <strong>
                 (
                     (k:pod || n:pod || ns:pod) ||
-                    (k:deploy || n:deploy || ns:deploy) 
+                    (k:deploy || n:deploy || ns:deploy)
                 ) <br/>
                 && <br/>
                 (k:foo || n:foo || ns:foo)
@@ -140,7 +140,7 @@ const renderQuerySection = () =>  {
     let result = '<div class="ui large divided list">'
     for(const q of queries) {
         result += `
-            <div class="item">
+            <div class="ui basic segment padded item">
                 <div class="help content">
                     <h3>${q[0]}</h3>
                     ${q[1]}
@@ -164,28 +164,34 @@ export const renderHelpPage = (noResults = false) => `
                 </div>
                 <div class="column">
                     <h2>Shortcuts</h2>
-                    <div class="ui aligned padded grid">
-                        <div class="two column row">
-                            <div class="left aligned column">
-                                :
+                    <div class="ui items">
+                        <div class="item">
+                            <div class="ui image">
+                                <div class="ui label">
+                                    :
+                                </div>
                             </div>
-                            <div class="right aligned column">
+                            <div class="middle aligned content">
                                 Select the search bar
                             </div>
                         </div>
-                        <div class="two column row">
-                            <div class="left aligned column">
-                                i
+                        <div class="item">
+                            <div class="ui image">
+                                <div class="ui label">
+                                    i
+                                </div>
                             </div>
-                            <div class="right aligned column">
+                            <div class="middle aligned content">
                                 Show details of a resource
                             </div>
                         </div>
-                        <div class="two column row">
-                            <div class="left aligned column">
-                                l
+                        <div class="item">
+                            <div class="ui image">
+                                <div class="ui label">
+                                    l
+                                </div>
                             </div>
-                            <div class="right aligned column">
+                            <div class="middle aligned content">
                                 Show logs for a selected Pod
                             </div>
                         </div>
