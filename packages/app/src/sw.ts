@@ -1,4 +1,5 @@
-const staticCacheName = 'site-static'
+import { gitSHA } from './sha'
+const staticCacheName = `site-static${gitSHA}`
 const staticAssetURLs = [
     '/',
     '/index.html',

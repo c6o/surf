@@ -1,10 +1,10 @@
 {
     "files.exclude": {
-        "**/node_modules/**": false,
-        "**/lib/**": false,
-        "**/dist/**": false,
-        "**/.nyc_output/**": false,
-        "**/package-lock.json/**": false
+        "**/node_modules/**": true,
+        "**/lib/**": true,
+        "**/dist/**": true,
+        "**/.nyc_output/**": true,
+        "**/package-lock.json/**": true
     },
     "cSpell.words": [
         "codezero",

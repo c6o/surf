@@ -228,6 +228,11 @@ section {
     float: right;
 }
 
+.help strong {
+    display: block;
+    padding: 10px 30px;
+}
+
 #dimmer #footer {
     font-size: .9rem;
     margin-top: 60px;
