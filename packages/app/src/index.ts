@@ -1,5 +1,6 @@
 import { CZConfig, jp, types } from './config.js'
 import { renderHelpPage, initHelp, placeHelpModal } from './help'
+import { gitSHA } from './sha'
 
 declare var io: typeof import('socket.io-client')
 declare var hotkeys: typeof import('hotkeys-js').default
@@ -537,7 +538,7 @@ if (false && 'serviceWorker' in navigator) {
 }
 
 $(async () => {
-    console.log('READY')
+    console.log(`READY build ${gitSHA}`)
     await window.customElements.whenDefined('json-viewer')
 
     initFeathers()
