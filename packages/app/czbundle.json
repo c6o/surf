@@ -3,6 +3,7 @@
     "bundle": {
         "entryPoints": [
             "./src/index.ts",
+            "./src/sentry.ts",
             "./src/sw.ts"
         ],
         "minify": true,

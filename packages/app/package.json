@@ -24,7 +24,7 @@
     "inject-sha": "git rev-parse --short=7 HEAD | sed 's/.*/export const gitSHA=\"&\"/' > src/sha.ts",
     "inject-gid": "cat public/index.html | sed -i 's/#GTAG_ID/G-B5ZXER6WT3/' public/index.html",
     "deploy": "yarn inject-gid && yarn inject-sha && czbundle -d",
-    "bundle": "yarn gen-sha && czbundle -d",
+    "bundle": "czbundle -d",
     "start-bundle": "czbundle -s"
   },
   "devDependencies": {
@@ -33,6 +33,8 @@
     "@feathersjs/client": "4.5.14",
     "@feathersjs/feathers": "^4.5.12",
     "@feathersjs/socketio-client": "^4.5.14",
+    "@sentry/browser": "^6.19.7",
+    "@sentry/tracing": "^6.19.7",
     "@types/crypto-js": "^4.1.1",
     "@types/jquery": "^3.5.14",
     "dayjs": "^1.11.1",
