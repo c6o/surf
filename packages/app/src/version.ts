@@ -16,25 +16,40 @@ export const checkDaemonVersion = async () => {
     const daemonVersion = health.version
     const hasNewCanary = semver.gt(canaryVersion, daemonVersion)
     const hasNewStable = semver.gt(stableVersion, daemonVersion)
+    const isTooOld = ~daemonVersion || semver.lt('1.7.0', daemonVersion)
 
     const newVersion = isCanary && hasNewCanary ?
         canaryVersion :
         hasNewStable ? stableVersion : undefined
 
-    if (newVersion)
+    const onHide = () => {
+        const install = ' czctl stop && curl -L https://get.c6o.io | /bin/bash && czctl start'
+        navigator.clipboard.writeText(install)
+        return true
+    }
+
+    if (isTooOld)
+        $('body')
+        .toast({
+            onHide,
+            class: 'inverted red',
+            displayTime: 0,
+            message: `
+                Surf requires CodeZero version 1.7.0 or later to run. 
+                You are currently at ${daemonVersion}. <br />
+                CLICK to copy upgrade commands.
+            `
+        })
+    else if (newVersion)
         $('body')
             .toast({
+                onHide,
                 class: 'inverted yellow',
                 displayTime: 0,
                 message: `
                     CodeZero version ${newVersion} is now available. 
                     You are currently at ${daemonVersion}. <br />
                     CLICK to copy upgrade commands.
-                `,
-                onHide: () => {
-                    const install = ' czctl stop && curl -L https://get.c6o.io | /bin/bash && czctl start'
-                    navigator.clipboard.writeText(install)
-                    return true
-                }
+                `
             })
 }
