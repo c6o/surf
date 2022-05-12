@@ -1,10 +1,9 @@
-import { CZConfig, jp, types } from './config.js'
+import { CZConfig, jp, types } from './config'
+import { initFeathers, queryService, daemonURL } from './feathers'
 import { renderHelpPage, initHelp, placeHelpModal } from './help'
 import { gitSHA } from './sha'
 
-declare var io: typeof import('socket.io-client')
 declare var hotkeys: typeof import('hotkeys-js').default
-declare var feathers: typeof import('@feathersjs/feathers')
 declare var Terminal: typeof import('xterm').Terminal
 declare var FitAddon: typeof import('xterm-addon-fit')
 declare var dayjs: typeof import('dayjs')
@@ -25,8 +24,6 @@ declare global {
 
 dayjs.extend(window.dayjs_plugin_relativeTime)
 
-const daemonURL = 'localhost:3070'
-
 let result
 let lastQueryId
 let previousResult
@@ -34,7 +31,6 @@ let page = 1
 let limit = 50
 let groupBy = 'none'
 let selectedItem
-let queryService
 
 
 const grouping = [
@@ -392,23 +388,6 @@ const searchInputKeydown = async (e) => {
 
 }
 
-const initFeathers = () => {
-     const socket = io(`ws://${daemonURL}`, {
-        transports: ['websocket'],
-        path: '/api/ws/',
-        upgrade: false
-    })
-
-    const client = feathers()
-    //@ts-ignore
-    client.configure(feathers.socketio(socket))
-
-    socket.on('connect', () => $('#dimmer').removeClass('active'))
-    socket.on('disconnect', () => $('#dimmer').addClass('active'))
-
-    queryService = client.service('api/surf/query')
-}
-
 const initWatches = () => {
     // queryService.on('created', onCreated)
     // queryService.on('updated', onUpdated)
@@ -549,7 +528,7 @@ $(async () => {
     initFeathers()
     initWatches()
     initHotKeys()
-    initHelp()
+    initHelp()    
 
     $(document).on('keydown', '#search-input', searchInputKeydown)
     $('#data-dump').html(renderHelpPage())
