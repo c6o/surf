@@ -33,11 +33,11 @@
         <script>
             // Don't pollute analytics with dev data
             if ('#GTAG_ID'.startsWith('G-')) {
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-
-                gtag('config', '#GTAG_ID');
+                window.dataLayer = window.dataLayer || []
+                function gtag() { dataLayer.push(arguments) }
+                gtag('js', new Date())
+                gtag('config', '#GTAG_ID')
+                window.gtag = gtag
             }
         </script>
     </head>

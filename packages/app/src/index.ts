@@ -354,6 +354,8 @@ const doSearch = async (s, p = 1, setInput = true, pushState = true) => {
         url.searchParams.set('p', p.toString())
         window.history.pushState({ s, p }, '', url.toString())
     }
+
+    window.gtag?.('event', 'search')
 }
 
 const searchInputKeydown = async (e) => {
@@ -491,6 +493,8 @@ const showLogs = (pod) => {
             await pipeLogData()
         }
     }).dimmer('show')
+
+    window.gtag?.('event', 'logs')
 }
 
 const initHotKeys = () => {
@@ -502,6 +506,7 @@ const initHotKeys = () => {
         // if (isVisible)
         //     $('.sidebar').sidebar('toggle')
         $('.sidebar').sidebar('toggle')
+        window.gtag?.('event', 'details')
     })
     hotkeys('l', () => showLogs(selectedItem))
 }
