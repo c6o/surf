@@ -16,8 +16,8 @@ export const checkDaemonVersion = async () => {
     const daemonVersion = health.version
     const hasNewCanary = semver.gt(canaryVersion, daemonVersion)
     const hasNewStable = semver.gt(stableVersion, daemonVersion)
-    const isTooOld = ~daemonVersion || semver.lt('1.7.0', daemonVersion)
-
+    const isTooOld = !daemonVersion || semver.lt(daemonVersion, '1.7.0')
+    
     const newVersion = isCanary && hasNewCanary ?
         canaryVersion :
         hasNewStable ? stableVersion : undefined

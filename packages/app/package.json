@@ -22,7 +22,7 @@
   "scripts": {
     "start": "http-server ./lib -S -C ../../ssl/cert.pem -K ../../ssl/key.pem -p 3000 -r",
     "inject-sha": "git rev-parse --short=7 HEAD | sed 's/.*/export const gitSHA=\"&\"/' > src/sha.ts",
-    "inject-gid": "cat public/index.html | sed -i 's/#GTAG_ID/G-B5ZXER6WT3/' public/index.html",
+    "inject-gid": "cat public/index.html | sed -i'.original' \"s/#GTAG_ID/$GTAG_ID/g\" public/index.html",
     "deploy": "yarn inject-gid && yarn inject-sha && czbundle -d",
     "bundle": "czbundle -d",
     "start-bundle": "czbundle -s"
