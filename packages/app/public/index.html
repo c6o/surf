@@ -79,19 +79,19 @@
                     </div>
                 </div>
                 <div id="main" class="ui fluid container">
-                    <div id="gradient-top"></div>
-                    <div id="gradient-bottom"></div>
+                    <div id="gradient-top" class="gradient"></div>
+                    <div id="gradient-bottom" class="gradient"></div>
                     <div id="sticky-wrapper" class="ui container">
                         <div class="sticky">
                             <div class="offline-spinner ui text active elastic loader">Waiting for daemon...</div>
                             <div class="get-started ui basic segment">
-                                <span class="ui inverted">
-                                    <p>This web app requires the free CodeZero Desktop<br /> daemon in order to securely access your Kubernetes clusters.</p>
+                                <div id="instructions" class="ui inverted">
+                                    <p>This web app requires the free CodeZero Desktop daemon in order to securely access your Kubernetes clusters.</p>
                                     <p>Copy and run the following commands to install and start the daemon:</p>
-                                </span>
+                                </div>
                                 <div class="ui message code inverted">
                                     <div
-                                        class="copy-command ui icon button"
+                                        class="copy-command ui icon small button"
                                         data-title="Copied to clipboard"
                                         data-content="Paste and run in your terminal"
                                         data-position="top left"
