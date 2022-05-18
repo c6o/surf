@@ -179,11 +179,16 @@ section {
 .sticky {
     position: absolute;
     right: -100px;
-    max-width: 520px;
 }
 
 .get-started {
     flex-grow: 1;
+}
+
+#instructions {
+    max-width: 360px;
+    text-align: center;
+    margin: 0 auto;
 }
 
 .message.code {
@@ -194,7 +199,7 @@ section {
     text-align: left;
     overflow-wrap: break-word;
     position: relative;
-    padding-right: 52px;
+    padding: 3.2em 2em 3.2em 2em;
 }
 
 .copy-command {
@@ -248,24 +253,22 @@ section {
     margin: 0 2px;
 }
 
-#gradient-top {
+.gradient {
     position: absolute;
     left: 0;
-    right: 0;
-    top: 0;
+    right: 40%;
     height: 30px;
-    background-image: linear-gradient(rgba(38,38,38,1), rgba(38,38,38,0));
     z-index: 100;
 }
 
+#gradient-top {
+    background-image: linear-gradient(rgba(38,38,38,1), rgba(38,38,38,0));
+    top: 0;
+}
+
 #gradient-bottom {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 30px;
     background-image: linear-gradient(rgba(38,38,38,0), rgba(38,38,38,1));
-    z-index: 100;
+    bottom: 0;
 }
 
 .ui.label {
@@ -290,8 +293,8 @@ section {
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .sticky {
-        max-width: 400px;
-        right: -20px;
+        max-width: 420px;
+        right: -25px;
     }
 }
 
@@ -331,6 +334,10 @@ section {
 
     .mobile {
         display: block;
+    }
+
+    .gradient {
+        right: 0;
     }
 }
 
