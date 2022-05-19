@@ -1,6 +1,7 @@
 import { CZConfig, jp, types } from './config'
-import { initFeathers, queryService, daemonURL } from './feathers'
+import { initFeathers, queryService, daemonURL, socket } from './feathers'
 import { renderHelpPage, initHelp, placeHelpModal } from './help'
+import { checkDaemonVersion } from './version'
 import { gitSHA } from './sha'
 
 declare var hotkeys: typeof import('hotkeys-js').default
@@ -321,6 +322,13 @@ const onRemoved = (resource) => {
     }
 }
 
+const cleanupQuery = async () => {
+    if (lastQueryId) {
+        await queryService.remove(lastQueryId)
+        lastQueryId = null
+    }
+}
+
 const doSearch = async (s, p = 1, setInput = true, pushState = true) => {
     if (!s) return
 
@@ -328,10 +336,7 @@ const doSearch = async (s, p = 1, setInput = true, pushState = true) => {
     const skip = limit * (p - 1)
 
     // Delete the previous hot query
-    if (lastQueryId) {
-        await queryService.remove(lastQueryId)
-        lastQueryId = null
-    }
+    await cleanupQuery()
 
     const result = await queryService.create({ s, skip, limit })
     lastQueryId = result.id
@@ -490,6 +495,23 @@ const initHotKeys = () => {
     hotkeys('l', () => showLogs(selectedItem))
 }
 
+const initConnectionHandling = () => {
+
+    socket.on('connect', async () => {
+        $('#dimmer').removeClass('active')
+        await checkDaemonVersion()
+
+        // Re-execute the query
+        if (window.history.state?.s)
+            await doSearch(window.history.state.s, window.history.state.p, true, false)
+   })
+
+   socket.on('disconnect', async () => {
+       $('#dimmer').addClass('active')
+       await cleanupQuery()
+   })
+}
+
 const jsonDblClick = async (e) => {
     $('.sidebar').sidebar('toggle')
     e.preventDefault()
@@ -528,7 +550,8 @@ $(async () => {
     initFeathers()
     initWatches()
     initHotKeys()
-    initHelp()    
+    initHelp()
+    initConnectionHandling()
 
     $(document).on('keydown', '#search-input', searchInputKeydown)
     $('#data-dump').html(renderHelpPage())
