@@ -287,7 +287,7 @@ const rowClicked = (e) => {
 
 const refresh = () => {
     selectedItem = null
-    $('#data-dump').html(result?.total ? 
+    $('#data-dump').html(result?.total ?
         renderResult() :
         renderHelpPage('No results found')
     )
@@ -489,7 +489,9 @@ const initHotKeys = () => {
         // const isVisible = $("#sidebar")[0].classList.contains('visible')
         // if (isVisible)
         //     $('.sidebar').sidebar('toggle')
-        $('.sidebar').sidebar('toggle')
+        $('.sidebar')
+            .sidebar('setting', 'transition', 'overlay')
+            .sidebar('toggle')
         window.gtag?.('event', 'details')
     })
     hotkeys('l', () => showLogs(selectedItem))

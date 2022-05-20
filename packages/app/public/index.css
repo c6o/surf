@@ -8,6 +8,12 @@ html, body {
     height: 100%;
 }
 
+#sidebar {
+    padding: 0 15px;
+    background-color: #2a2f3a;
+    width: 550px;
+}
+
 /* Online */
 
 #search-box {
@@ -54,10 +60,6 @@ section {
 
 #result-grid {
     height: inherit;
-}
-
-#json {
-    height: 100%;
 }
 
 @-webkit-keyframes changed {

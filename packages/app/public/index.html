@@ -200,33 +200,36 @@
         </div>
 
         <!-- Daemon online -->
-        <div class="ui fluid container full-height">
-            <div id="toolbar" class="ui middle aligned centered grid">
-                <div class="fourteen wide column">
-                    <div id="search-box" class="ui left icon input">
-                        <i class="search icon"></i>
-                        <input id="search-input" type="text" placeholder="Surf Kubernetes resources...">
+        <!-- the pusher class is used with the sidebar -->
+        <div class="pusher">
+            <div class="ui fluid container full-height">
+                <div id="toolbar" class="ui middle aligned centered grid">
+                    <div class="fourteen wide column">
+                        <div id="search-box" class="ui left icon input">
+                            <i class="search icon"></i>
+                            <input id="search-input" type="text" placeholder="Surf Kubernetes resources...">
+                        </div>
+                    </div>
+                    <div class="two wide right aligned column">
+                        <a id="help-command" href="#">
+                            <i class="question circle outline icon large"></i>
+                        </a>
+                        <a href="https://github.com/c6o/surf" target="_blank">
+                            <i class="large github icon"></i>
+                        </a>
+                        <a href="https://discord.gg/wx3JkVjTPy" target="_blank">
+                            <i class="large discord icon"></i>
+                            <!--img class="discord-alt" src="/icons/vendor/discord.svg"/-->
+                        </a>
                     </div>
                 </div>
-                <div class="two wide right aligned column">
-                    <a id="help-command" href="#">
-                        <i class="question circle outline icon large"></i>
-                    </a>
-                    <a href="https://github.com/c6o/surf" target="_blank">
-                        <i class="large github icon"></i>
-                    </a>
-                    <a href="https://discord.gg/wx3JkVjTPy" target="_blank">
-                        <i class="large discord icon"></i>
-                        <!--img class="discord-alt" src="/icons/vendor/discord.svg"/-->
-                    </a>
-                </div>
-            </div>
-            <div id="data-dump"></div>
-            <div id="modals-placeholder"></div>
+                <div id="data-dump"></div>
+                <div id="modals-placeholder"></div>
 
-            <div id="terminal-dimmer" class="ui page dimmer">
-                <div id="terminal-header" class="header"></div>
-                <div id="terminal" class="content"></div>
+                <div id="terminal-dimmer" class="ui page dimmer">
+                    <div id="terminal-header" class="header"></div>
+                    <div id="terminal" class="content"></div>
+                </div>
             </div>
         </div>
 
