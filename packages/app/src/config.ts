@@ -12,23 +12,32 @@ export const jp = (row, path) =>
 const age = (row) =>
     dayjs(jp(row, '$.metadata.creationTimestamp')).fromNow(true)
 
-const deploymentAvailable = (row) => ({
-    value: `${row.status?.availableReplicas || 0}/${row.status?.replicas || 0}`,
-    states: [
-        [row.status?.availableReplicas === 0 && row.status?.replicas !== 0, 'error'],
-        [row.status?.availableReplicas < row.status?.replicas, 'warn'],
-        [row.status?.availableReplicas === row.status?.replicas, 'ok']
-    ]
-})
+const deploymentAvailable = (row) => {
+    const availableReplicas = row.status?.availableReplicas || 0
+    return {
+        value: `${availableReplicas}/${row.status?.replicas || 0}`,
+        states: [
+            [row.status?.availableReplicas === 0 && row.status?.replicas !== 0, 'error'],
+            [availableReplicas < row.status?.replicas, 'warn'],
+            [row.status?.availableReplicas === row.status?.replicas, 'ok']
+        ]
+    }
+}
 
-const podStatus = (row) => ({
-    value: row.metadata?.deletionTimestamp ? 'Terminating' : row.status?.phase,
-    states: [
-        [!!row.metadata?.deletionTimestamp, 'error'],
-        [row.status?.phase === 'Running', 'ok'],
-        [true, 'warn']
-    ]
-})
+const podStatus = (row) => {
+    const waitingContainer = row.status?.containerStatuses?.find(cs => cs.state.waiting)
+        return {
+        value: row.metadata?.deletionTimestamp ? 'Terminating' : 
+                waitingContainer ? 
+                waitingContainer.state.waiting.reason : 
+                row.status?.phase,
+        states: [
+            [!!row.metadata?.deletionTimestamp, 'error'],
+            [!waitingContainer && row.status?.phase === 'Running', 'ok'],
+            [true, 'warn']
+        ]
+    }
+}
 
 const svcExtIP = (row) => {
     if (row.spec.type !== 'LoadBalancer') return
