@@ -7,7 +7,11 @@ declare global {
     }
 }
 
+let versionToastVisible = false
+
 export const checkDaemonVersion = async () => {
+    if (versionToastVisible) return // Fix: https://github.com/c6o/surf/issues/8
+
     const health = await healthService.find({ })
 
     const isCanary = !!semver.prerelease(health.version)
@@ -23,15 +27,19 @@ export const checkDaemonVersion = async () => {
         hasNewStable ? stableVersion : undefined
 
     const onHide = () => {
+        versionToastVisible = false
         const install = ' czctl stop && curl -L https://get.c6o.io | /bin/bash && czctl start'
         navigator.clipboard.writeText(install)
         return true
     }
 
+    const onVisible = () => versionToastVisible = true
+
     if (isTooOld)
         $('body')
         .toast({
             onHide,
+            onVisible,
             class: 'inverted red',
             displayTime: 0,
             message: `
@@ -44,6 +52,7 @@ export const checkDaemonVersion = async () => {
         $('body')
             .toast({
                 onHide,
+                onVisible,
                 class: 'inverted yellow',
                 displayTime: 0,
                 message: `

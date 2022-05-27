@@ -572,6 +572,7 @@ $(async () => {
             on: 'click'
         })
         .click(() => {
+            window.gtag?.('event', 'cta-install-copy')
             const install = 'curl -L https://get.c6o.io | /bin/bash && czctl start'
             navigator.clipboard.writeText(install)
             setTimeout(hidePopup, 3500)
