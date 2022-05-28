@@ -204,7 +204,10 @@ section {
     padding: 3.2em 2em 3.2em 2em;
 }
 
-.copy-command {
+.command {
+    position: -webkit-sticky; /* older versions of Safari */
+    position: sticky; /* Doesn't work in IE */
+    top: 0;
     z-index: 200;
 }
 
@@ -225,6 +228,7 @@ section {
     position: absolute;
     right: 3px;
     top: 7px;
+    z-index: 200;
 }
 
 .basic.segment.aligned p {
