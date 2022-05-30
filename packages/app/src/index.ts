@@ -563,19 +563,24 @@ $(async () => {
 
     window.addEventListener('popstate', async (event) => await doSearch(event.state?.s, event.state?.p, true, false))
 
-    const hidePopup = () => $('.copy-command').popup('hide')
     // copy the sticky HTML into the mobile-only part.
     // This needs to come before the copy-command events
     $('.mobile').html($('.sticky').html())
     $('.copy-command')
-        .popup({
-            on: 'click'
-        })
         .click(() => {
-            window.gtag?.('event', 'cta-install-copy')
             const install = 'curl -L https://get.c6o.io | /bin/bash && czctl start'
             navigator.clipboard.writeText(install)
-            setTimeout(hidePopup, 3500)
+            $('body')
+                .toast({
+                    class: 'success',
+                    displayTime: 10000,
+                    message: `
+                        <p>Commands copied! Paste and run it in your terminal.</p>
+                        <p>When the daemon starts, this page will automatically refresh.</p>
+                    `
+                })
+
+            window.gtag?.('event', 'cta-install-copy')
         })
 
     const params = new URLSearchParams(document.location.search)

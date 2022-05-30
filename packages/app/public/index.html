@@ -33,7 +33,7 @@
         <script>
             // Don't pollute analytics with dev data
             if ('#GTAG_ID'.startsWith('G-') || '#GTAG_ID'.startsWith('UA-')) {
-                
+
                 (function(h,o,t,j,a,r){
                     h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
                     h._hjSettings={hjid:2739861,hjsv:6};
@@ -93,21 +93,15 @@
                     <div id="gradient-bottom" class="gradient"></div>
                     <div id="sticky-wrapper" class="ui container">
                         <div class="sticky">
-                            <div class="offline-spinner ui text active elastic loader">Waiting for daemon...</div>
                             <div class="get-started ui basic segment">
                                 <div id="instructions" class="ui inverted">
                                     <p>This web app requires the free CodeZero Desktop daemon in order to securely access your Kubernetes clusters.</p>
-                                    <p>Copy and run the following commands to install and start the daemon:</p>
+                                    <p>Click below to copy the commands. Then paste the commands in your terminal to install and start the daemon:</p>
+                                </div>
+                                <div class="copy-command ui icon small primary button">
+                                        <i class="clipboard icon"></i> Click to copy commands
                                 </div>
                                 <div class="ui message code inverted">
-                                    <div
-                                        class="copy-command ui icon small button"
-                                        data-title="Copied to clipboard"
-                                        data-content="Paste and run in your terminal"
-                                        data-position="top left"
-                                    >
-                                        <i class="clipboard icon"></i>
-                                    </div>
                                     <span class="command">> curl -L https://get.c6o.io | /bin/bash</span>
                                     <br />
                                     <br />
@@ -124,6 +118,7 @@
                                 <h3 class="supported-arch ui header inverted">
                                     x64 <i class="small heart icon"></i> arm64
                                 </h3>
+                                <div class="offline-spinner ui text active elastic loader">Waiting for daemon...</div>
                             </div>
                         </div>
                     </div>

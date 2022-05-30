@@ -191,12 +191,13 @@ section {
     max-width: 360px;
     text-align: center;
     margin: 0 auto;
+    margin-bottom: 30px;
 }
 
 .message.code {
     font-family: 'Courier New', Courier, monospace;
     font-size: 1.2rem;
-    margin: 40px 0;
+    margin: 20px 0 30px;
     background-color: #ccc;
     text-align: left;
     overflow-wrap: break-word;
@@ -204,7 +205,8 @@ section {
     padding: 3.2em 2em 3.2em 2em;
 }
 
-.command {
+.command,
+.copy-command {
     position: -webkit-sticky; /* older versions of Safari */
     position: sticky; /* Doesn't work in IE */
     top: 0;
@@ -216,19 +218,14 @@ section {
     height: auto;
 }
 
-.supported-arch {
+.supported-arch.ui.header {
+    margin-bottom: 30px;
+    margin-top: 10px;
     opacity: .5;
 }
 
 .supported-arch .icon {
     margin-left: 0.75rem;
-}
-
-.copy-command {
-    position: absolute;
-    right: 3px;
-    top: 7px;
-    z-index: 200;
 }
 
 .basic.segment.aligned p {
