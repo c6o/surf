@@ -390,7 +390,6 @@ const searchInputKeydown = async (e) => {
             target.value = value.substring(0, start) + replace + value.substring(end, value.length)
         }
     }
-
 }
 
 const initWatches = () => {
@@ -404,7 +403,6 @@ const initWatches = () => {
         previousResult = result
         result = payload
         refresh()
-
     })
 }
 
@@ -575,8 +573,8 @@ $(async () => {
                     class: 'success',
                     displayTime: 10000,
                     message: `
-                        <p>Commands copied! Paste and run it in your terminal.</p>
-                        <p>When the daemon starts, this page will automatically refresh.</p>
+                        <p>Commands copied! Paste and run them in your terminal.</p>
+                        <p>When the daemon starts this page will automatically refresh.</p>
                     `
                 })
 
