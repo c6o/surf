@@ -32,6 +32,11 @@ html, body {
     margin-bottom: -3pt !important;
 }
 
+#data-dump {
+    height: calc(100vh - 65px);
+    overflow: auto;
+}
+
 .c6o-panel {
     background-color: lightgrey;
 }
@@ -211,6 +216,10 @@ section {
     position: sticky; /* Doesn't work in IE */
     top: 0;
     z-index: 200;
+}
+
+.command:first-child {
+    padding-bottom: 20px;
 }
 
 .supported-logos .ui.image {
