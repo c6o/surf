@@ -1,5 +1,6 @@
 import { CZConfig, jp, types } from './config'
 import { initFeathers, queryService, daemonURL, socket } from './feathers'
+import { initDownload } from './download'
 import { renderHelpPage, initHelp, placeHelpModal } from './help'
 import { checkDaemonVersion } from './version'
 import { gitSHA } from './sha'
@@ -552,6 +553,7 @@ $(async () => {
     initHotKeys()
     initHelp()
     initConnectionHandling()
+    await initDownload();
 
     $(document).on('keydown', '#search-input', searchInputKeydown)
     $('#data-dump').html(renderHelpPage())

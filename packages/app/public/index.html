@@ -94,29 +94,40 @@
                     <div id="sticky-wrapper" class="ui container">
                         <div class="sticky">
                             <div class="get-started ui basic segment">
-                                <div id="instructions" class="ui inverted">
-                                    <p>This web app requires the free CodeZero Desktop daemon in order to securely access your Kubernetes clusters.</p>
-                                    <p>Click below to copy the commands. Then paste the commands in your terminal to install and start the daemon:</p>
+                                <div class="ui inverted instructions">
+                                    <h3>Getting Started</h3>
+                                    <p>This web app requires a running Kubernetes cluster and the free CodeZero Desktop daemon to securely access the cluster.</p>
+                                    <p>Choose one of the following install options:</p>
                                 </div>
-                                <div class="copy-command ui icon small primary button">
-                                    <i class="clipboard icon"></i> Click to copy commands
-                                </div>
-                                <div class="ui message code inverted">
-                                    <div class="command">> curl -L https://get.c6o.io | /bin/bash</div>
-                                    <div class="command">> czctl start</div>
-                                </div>
-                                <div class="supported-logos ui four column centered grid padded">
+                                <div class="supported-logos ui four column centered middle aligned grid padded">
                                     <div class="column">
                                         <img class="ui centered image mini" src="/icons/vendor/apple-white.svg">
                                     </div>
                                     <div class="column">
-                                        <img class="ui centered image mini" src="/icons/vendor/linux-white.svg">
+                                        <div id="mac-x64-download" class="install-button ui icon small primary button">
+                                            <i class="download icon"></i> Intel
+                                        </div>
+                                        <div id="mac-arm64-download" class="install-button ui icon small primary button">
+                                            <i class="download icon"></i> M1
+                                        </div>
                                     </div>
                                 </div>
-                                <h3 class="supported-arch ui header inverted">
-                                    x64 <i class="small heart icon"></i> arm64
-                                </h3>
-                                <div class="offline-spinner ui text active elastic loader">Waiting for daemon...</div>
+                                <div class="ui inverted divider"></div>
+                                <div class="supported-logos ui four column centered middle aligned grid padded">
+                                    <div class="column">
+                                        <img class="ui centered image mini" src="/icons/vendor/linux-white.svg">
+                                    </div>
+                                    <div class="column">
+                                        <div class="copy-command install-button ui icon small primary button">
+                                            <i class="clipboard icon"></i> Click to copy
+                                        </div>    
+                                    </div>
+                                </div>
+
+                                <div class="ui message code inverted">
+                                    <div class="command">> curl -L https://get.c6o.io | /bin/bash</div>
+                                    <div class="command">> czctl start</div>
+                                </div>
                             </div>
                         </div>
                     </div>

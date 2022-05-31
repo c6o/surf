@@ -192,11 +192,27 @@ section {
     flex-grow: 1;
 }
 
-#instructions {
+#mac-x64-download {
+    margin-bottom: 20px;
+}
+
+.install-button {
+    position: -webkit-sticky; /* older versions of Safari */
+    position: sticky; /* Doesn't work in IE */
+    top: 0;
+    z-index: 200;
+    min-width: 150px;
+}
+
+.instructions {
     max-width: 360px;
-    text-align: center;
+    text-align: left;
     margin: 0 auto;
     margin-bottom: 30px;
+}
+
+.instructions h3 {
+    text-align:center;
 }
 
 .message.code {

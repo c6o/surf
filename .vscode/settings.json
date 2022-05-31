@@ -4,7 +4,8 @@
         "**/lib/**": true,
         "**/dist/**": true,
         "**/.nyc_output/**": true,
-        "**/package-lock.json/**": true
+        "**/package-lock.json/**": true,
+        "**/tsconfig.tsbuildinfo": true
     },
     "cSpell.words": [
         "codezero",
