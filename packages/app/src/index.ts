@@ -21,6 +21,7 @@ declare global {
         sidebar: any
         dimmer: any
         popup: any
+        embed: any
     }
 }
 
@@ -547,6 +548,7 @@ if (false && 'serviceWorker' in navigator) {
 $(async () => {
     console.log(`READY build ${gitSHA}`)
     await window.customElements.whenDefined('json-viewer')
+    $('#demo-video').embed()
 
     initFeathers()
     initWatches()
